@@ -91,44 +91,44 @@ df.to_csv(os.path.join(out_dir, 'neuromaps_evoexp_bilateral_results.csv'), index
 print(f'\nResults saved to {out_dir}neuromaps_evoexp_bilateral_results.csv')
 print(df.to_string())
 
-# ###Viz###
-# all_annot_names = [name for name, _ in fslr32k_annots]
-# contrast_order  = ['EDR_HC', 'EDBP_HC', 'EDR_EDBP']
-# measure_order   = ['T1w_contrast', 'sulc', 'thickness', 'area', 'RND-gm', 'RNI-gm', 'RND-wm', 'RNI-wm']
+###Viz###
+all_annot_names = [name for name, _ in fslr32k_annots]
+contrast_order  = ['EDR_HC', 'EDBP_HC', 'EDR_EDBP']
+measure_order   = ['T1w_contrast', 'sulc', 'thickness', 'area', 'RND-gm', 'RNI-gm', 'RND-wm', 'RNI-wm']
 
-# plot_rows = []
-# for _, row in df.iterrows():
-#     for name in all_annot_names:
-#         plot_rows.append({
-#             'annotation':  name,
-#             'measure':     row['measure'],
-#             'contrast':    row['contrast'],
-#             'r':           row[f'r_{name}'],
-#             'p':           row[f'p_{name}'],
-#             'significant': row[f'p_{name}'] < 0.05,
-#         })
-# plot_df = pd.DataFrame(plot_rows)
+plot_rows = []
+for _, row in df.iterrows():
+    for name in all_annot_names:
+        plot_rows.append({
+            'annotation':  name,
+            'measure':     row['measure'],
+            'contrast':    row['contrast'],
+            'r':           row[f'r_{name}'],
+            'p':           row[f'p_{name}'],
+            'significant': row[f'p_{name}'] < 0.05,
+        })
+plot_df = pd.DataFrame(plot_rows)
 
-# for name in all_annot_names:
-#     sub     = plot_df[plot_df['annotation'] == name]
-#     r_pivot = sub.pivot(index='measure', columns='contrast', values='r').reindex(index=measure_order, columns=contrast_order)
-#     p_pivot = sub.pivot(index='measure', columns='contrast', values='p').reindex(index=measure_order, columns=contrast_order)
+for name in all_annot_names:
+    sub     = plot_df[plot_df['annotation'] == name]
+    r_pivot = sub.pivot(index='measure', columns='contrast', values='r').reindex(index=measure_order, columns=contrast_order)
+    p_pivot = sub.pivot(index='measure', columns='contrast', values='p').reindex(index=measure_order, columns=contrast_order)
 
-#     annot_cells = r_pivot.copy().astype(object)
-#     for i in r_pivot.index:
-#         for j in r_pivot.columns:
-#             sig = '*' if p_pivot.loc[i, j] < 0.05 else ''
-#             annot_cells.loc[i, j] = f'{r_pivot.loc[i, j]:.2f}{sig}'
+    annot_cells = r_pivot.copy().astype(object)
+    for i in r_pivot.index:
+        for j in r_pivot.columns:
+            sig = '*' if p_pivot.loc[i, j] < 0.05 else ''
+            annot_cells.loc[i, j] = f'{r_pivot.loc[i, j]:.2f}{sig}'
 
-#     fig, ax = plt.subplots(figsize=(7, 4))
-#     sns.heatmap(r_pivot, annot=annot_cells, fmt='', cmap='RdBu_r', center=0,
-#                 vmin=-0.5, vmax=0.5, linewidths=0.5, ax=ax, annot_kws={'size': 8})
-#     ax.set_title(f'Neuromaps correlation: {name} (bilateral)\n(* = p < 0.05, spin test)')
-#     ax.set_xlabel('')
-#     ax.set_ylabel('')
-#     ax.tick_params(axis='x', labelsize=8, rotation=30)
-#     ax.tick_params(axis='y', labelsize=8, rotation=0)
-#     plt.tight_layout()
-#     plt.savefig(os.path.join(out_dir, f'heatmap_bilateral_{name}.png'), dpi=150)
-#     plt.close()
-#     print(f'Saved: heatmap_bilateral_{name}.png')
+    fig, ax = plt.subplots(figsize=(7, 4))
+    sns.heatmap(r_pivot, annot=annot_cells, fmt='', cmap='RdBu_r', center=0,
+                vmin=-0.5, vmax=0.5, linewidths=0.5, ax=ax, annot_kws={'size': 8})
+    ax.set_title(f'Neuromaps correlation: {name} (bilateral)\n(* = p < 0.05, spin test)')
+    ax.set_xlabel('')
+    ax.set_ylabel('')
+    ax.tick_params(axis='x', labelsize=8, rotation=30)
+    ax.tick_params(axis='y', labelsize=8, rotation=0)
+    plt.tight_layout()
+    plt.savefig(os.path.join(out_dir, f'heatmap_bilateral_{name}.png'), dpi=150)
+    plt.close()
+    print(f'Saved: heatmap_bilateral_{name}.png')

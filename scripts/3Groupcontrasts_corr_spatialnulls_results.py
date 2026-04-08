@@ -35,21 +35,11 @@ cbf = datasets.fetch_annotation(source='raichle', desc='cbf', return_single=True
 cbv = datasets.fetch_annotation(source='raichle', desc='cbv', return_single=True) #cerebral blood volume
 cmrglc_raichle = datasets.fetch_annotation(source='raichle', desc='cmrglc', return_single=True) #glucose metabolism
 cmro2 = datasets.fetch_annotation(source='raichle', desc='cmr02', return_single=True) #oxygen metabolism
-sert_bel = datasets.fetch_annotation(source='beliveau2017', desc='dasb', space='fsaverage', den='164k', return_single=True) #SERT serotonin transporter
-ht2a_bel = datasets.fetch_annotation(source='beliveau2017', desc='cimbi36', space='fsaverage', den='164k', return_single=True) #5-HT2A receptor
-ht1b_bel = datasets.fetch_annotation(source='beliveau2017', desc='az10419369', space='fsaverage', den='164k', return_single=True) #5-HT1B receptor
-ht4_cumi = datasets.fetch_annotation(source='beliveau2017', desc='cumi101', space='fsaverage', den='164k', return_single=True) #5-HT4 receptor
-gabaa_norg = datasets.fetch_annotation(source='norgaard2021', desc='flumazenil', space='fsaverage', den='164k', return_single=True) #GABA-A benzodiazepine site
+
 
 #Annotations-fsLR 32k
-fcgrad1 = datasets.fetch_annotation(source='margulies2016', desc='fcgradient01', return_single=True) #FC gradient 1
-fcgrad2 = datasets.fetch_annotation(source='margulies2016', desc='fcgradient02', return_single=True) #FC gradient 2
-fcgrad3 = datasets.fetch_annotation(source='margulies2016', desc='fcgradient03', return_single=True) #FC gradient 3
-myelin = datasets.fetch_annotation(source='hcps1200', desc='myelinmap', return_single=True) #T1w/T2w myelin proxy
-hcp_thick = datasets.fetch_annotation(source='hcps1200', desc='thickness', return_single=True) #cortical thickness HCP
 saaxis = datasets.fetch_annotation(source='sydnor2021', desc='SAaxis', return_single=True) #sensorimotor-association axis
 evoexp_xu = datasets.fetch_annotation(source='xu2020', desc='evoexp', return_single=True) #evolutionary expansion
-fchomology = datasets.fetch_annotation(source='xu2020', desc='FChomology', return_single=True) #functional connectivity homology
 
 #Grouped by the fs/fsLR spaces 
 fsaverage_annots = [
@@ -60,22 +50,11 @@ fslr164k_annots = [
  ('cbf', cbf),
  ('cbv', cbv),
  ('cmrglc_raichle', cmrglc_raichle),
- ('cmro2', cmro2),
- ('sert', sert_bel),
- ('5ht2a', ht2a_bel),
- ('5ht1b', ht1b_bel),
- ('5ht4', ht4_cumi),
- ('gabaa', gabaa_norg),
+ ('cmro2', cmro2)
 ]
 fslr32k_annots = [
- ('fcgradient01', fcgrad1),
- ('fcgradient02', fcgrad2),
- ('fcgradient03', fcgrad3),
- ('myelinmap', myelin),
- ('hcp_thickness', hcp_thick),
  ('SAaxis', saaxis),
- ('evoexp_xu', evoexp_xu),
- ('FChomology', fchomology),
+ ('evoexp_xu', evoexp_xu)
 ]
  
 #############Output Results#############
@@ -137,7 +116,7 @@ for measure in measures:
  
         #fsLR 32k
         my_map_r3, _ = resampling.resample_images(
-            src=my_map, trg=fcgrad1,
+            src=my_map, trg=saaxis,
             src_space='fsaverage', trg_space='fsLR',
             resampling='transform_to_trg')
  
