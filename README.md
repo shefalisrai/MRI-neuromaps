@@ -1,10 +1,10 @@
 This repository contains analysis scripts and results for data from adolescents with eating disorders from UCSD Eating Disorder Clinic.
 Analyses use vertex-wise MRI contrast maps correlated with brain atlas annotations.
 
-Toolboxes used:
-  neuromaps - spatial null testing of annotations with contrast maps (from Markello et al., 2022) & cell type and gene expression data - spatial null testing with contrast maps (from Shafiei et al., 2023)
+## Toolboxes:
+[neuromaps](https://github.com/netneurolab/neuromaps) - Markello et al., 2022
+[shafiei_megdynamics](https://github.com/netneurolab/shafiei_megdynamics) - cell type and gene expression data
 
-
-Contents:
-  scripts/ - Python analysis and R plotting scripts
-  results/ - figures and output CSVs
+## Contents
+- `scripts/` - Python analysis and R plotting scripts
+- `results/` - figures and output CSVs
