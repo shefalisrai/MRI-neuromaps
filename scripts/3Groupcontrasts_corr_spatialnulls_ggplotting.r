@@ -7,9 +7,8 @@ library(cowplot)
 library(scales)
 
 out_dir <- "/Users/shefalirai/Desktop/UCSD_Research/TemperamentData/Temperament_analysis/neuromaps/results/"
-df      <- read.csv(file.path(out_dir, "neuromaps_results.csv"), stringsAsFactors = FALSE)
+df<- read.csv(file.path(out_dir, "neuromaps_results.csv"), stringsAsFactors = FALSE)
 cat(sprintf("Loaded %d rows\n", nrow(df)))
-
 
 contrast_order <- c("EDR_HC", "EDBP_HC", "EDR_EDBP")
 
@@ -34,7 +33,18 @@ measure_labels <- c(
 )
 
 r_cols      <- grep("^r_", names(df), value = TRUE)
-annot_names <- sub("^r_", "", r_cols)
+annot_names <- c("genepc1", "subjvar", "cbf", "cbv", "cmrglc_raichle", "cmro2",
+                 "SAaxis", "evoexp_xu")
+annot_labels <- c(
+  "genepc1"       = "Gene Expression PC1",
+  "subjvar"       = "Intersubject Variability",
+  "cbf"           = "Cerebral Blood Flow",
+  "cbv"           = "Cerebral Blood Volume",
+  "cmrglc_raichle" = "Glucose Metabolism",
+  "cmro2"         = "Oxygen Metabolism",
+  "SAaxis"        = "Sensorimotor-Association Axis",
+  "evoexp_xu"     = "Evolutionary Expansion"
+)
 
 plot_rows <- lapply(annot_names, function(name) {
   data.frame(
@@ -62,12 +72,12 @@ pub_theme <- theme_minimal(base_size = 11) +
     panel.border        = element_rect(color = "grey30", fill = NA, linewidth = 0.5),
     panel.background    = element_rect(fill = "white", color = NA),
     plot.background     = element_rect(fill = "white", color = NA),
-    # X-axis: bigger, bold, angled
+    #xaxis
     axis.text.x         = element_text(angle = 45, hjust = 1, vjust = 1,
-                                       size = 8.5, color = "grey10",
+                                       size = 11, color = "black",
                                        face = "bold"),
-    # Y-axis: bigger
-    axis.text.y         = element_text(size = 8.5, color = "grey10"),
+    #yaxis
+    axis.text.y         = element_text(size = 11, color = "black", face="bold"),
     axis.ticks          = element_line(color = "grey60", linewidth = 0.3),
     axis.title          = element_blank(),
     strip.text          = element_text(face = "bold", size = 11),
@@ -78,7 +88,7 @@ pub_theme <- theme_minimal(base_size = 11) +
     legend.key.height   = unit(2.5, "cm"),
     legend.position     = "right",
     # Panel title: centered, larger
-    plot.title          = element_text(face = "bold", size = 11, hjust = 0.5,
+    plot.title          = element_text(face = "bold", size = 11, hjust = 0.66,
                                        margin = margin(b = 6)),
     plot.title.position = "plot",
     plot.margin         = margin(8, 6, 8, 6)
@@ -95,29 +105,32 @@ pur_scale <- scale_fill_gradientn(
 )
 
 
-make_panel <- function(contrast_id, show_y = TRUE, show_legend = FALSE) {
+make_panel <- function(contrast_id, show_y = TRUE, show_legend = FALSE, show_x = TRUE) {
   
   sub <- plot_df %>% filter(contrast == contrast_id)
   
-  ggplot(sub, aes(x = annotation, y = measure, fill = r)) +
-    geom_tile(color = "white", linewidth = 0.5) +
-    # Significance border
+  ggplot(sub, aes(x = annotation, y = measure)) +
+    # Color by r value
+    geom_tile(aes(fill = r), color = "white", linewidth = 0.5) +
+    # White tile for sig.cells
     geom_tile(data = filter(sub, significant),
-              aes(x = annotation, y = measure),
-              fill      = NA,
-              color     = "#00CED1",
-              linewidth = 1.0) +
-    # r-value text
-    geom_text(aes(label = sprintf("%.2f", r)),
-              size = 3.0, color = "grey10", fontface = "plain",
-              vjust = 0.2) +
-    # Asterisk on significant cells
+              fill = "#F4F4F6", color = "white", linewidth = 0.5) +
+    # Colored circle for sig.cells
+    geom_point(data = filter(sub, significant),
+               aes(fill = r),
+               shape = 21, size = 12, color = "black", stroke = 1.2) +
+    # Non-significant r values black
+    geom_text(data = filter(sub, !significant),
+              aes(label = sprintf("%.2f", r)),
+              size = 3.0, color = "grey30", fontface = "plain", vjust = 0.5) +
+    # Significant r values black and bold
     geom_text(data = filter(sub, significant),
-              aes(label = "*"),
-              size = 4.0, color = "#00CED1", fontface = "bold",
-              vjust = -0.65, hjust = 0.5) +
+              aes(label = sprintf("%.2f*", r)),
+              size = 3.0, color = "black", fontface = "bold", vjust = 0.5) +
+    geom_hline(yintercept = seq(0.5, length(measure_order) + 0.5, 1), color = "grey85", linewidth = 0.3) +
+    geom_vline(xintercept = seq(0.5, length(annot_names) + 0.5, 1), color = "grey85", linewidth = 0.3) +
     pur_scale +
-    scale_x_discrete(expand = c(0, 0)) +
+    scale_x_discrete(expand = c(0, 0), labels = if (show_x) annot_labels else NULL) +
     scale_y_discrete(
       expand = c(0, 0),
       labels = if (show_y) measure_labels else NULL
@@ -127,10 +140,9 @@ make_panel <- function(contrast_id, show_y = TRUE, show_legend = FALSE) {
     theme(legend.position = if (show_legend) "right" else "none")
 }
 
-
-p1 <- make_panel("EDR_HC",   show_y = TRUE, show_legend = FALSE)
-p2 <- make_panel("EDBP_HC",  show_y = TRUE, show_legend = FALSE)
-p3 <- make_panel("EDR_EDBP", show_y = TRUE, show_legend = TRUE)
+p1 <- make_panel("EDR_HC",   show_y = TRUE, show_legend = FALSE, show_x = FALSE)
+p2 <- make_panel("EDBP_HC",  show_y = TRUE, show_legend = FALSE, show_x = FALSE)
+p3 <- make_panel("EDR_EDBP", show_y = TRUE, show_legend = TRUE,  show_x = TRUE)
 
 
 legend_only <- get_legend(
@@ -138,8 +150,8 @@ legend_only <- get_legend(
     legend.position   = "right",
     legend.key.height = unit(5, "cm"),
     legend.key.width  = unit(0.55, "cm"),
-    legend.title      = element_text(size = 10, face = "bold"),
-    legend.text       = element_text(size = 9)
+    legend.title      = element_text(size = 11, face = "bold"),
+    legend.text       = element_text(size = 11)
   )
 )
 
@@ -150,7 +162,7 @@ p3_nl <- p3 + theme(legend.position = "none")
 stacked <- plot_grid(
   p1_nl, p2_nl, p3_nl,
   ncol        = 1,
-  rel_heights = c(1, 1, 1),
+  rel_heights = c(1, 1, 1.5), 
   align       = "v",
   axis        = "lr"
 )
@@ -159,22 +171,13 @@ stacked <- plot_grid(
 combined <- plot_grid(
   stacked, legend_only,
   ncol       = 2,
-  rel_widths = c(1, 0.07)
+  rel_widths = c(1, 0.12)
 )
 
-title_row <- ggdraw() +
-  draw_label("Spatial Correlations",
-             fontface = "bold", size = 15, hjust = 0.5, x = 0.5)
-
-subtitle_row <- ggdraw() +
-  draw_label("* p < 0.05, spin test",
-             size = 10.5, color = "grey35", hjust = 0.5, x = 0.5,
-             fontface = "italic")
 
 final <- plot_grid(
-  title_row, subtitle_row, combined,
-  ncol        = 1,
-  rel_heights = c(0.045, 0.03, 1)
+  combined,
+  ncol        = 1
 )
 
 n_annot   <- length(annot_names)
@@ -184,7 +187,7 @@ fig_w <- n_annot * 0.52 + 3.5
 fig_h <- n_measure * 0.52 * 3 + 3.0
 
 ggsave(
-  filename = file.path(out_dir, "unified_heatmap_neuromaps_ggplot.png"),
+  filename = file.path(out_dir, "sigcircles_heatmap_neuromaps_ggplot.png"),
   plot     = final,
   width    = fig_w,
   height   = fig_h,
