@@ -1,0 +1,10 @@
+# Ignore everything
+*
+
+# Except these folders/files
+!scripts/
+!scripts/**
+!results/
+!results/**
+!celltypes_PSP.csv
+!.gitignore
