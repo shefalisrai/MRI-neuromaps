@@ -36,6 +36,9 @@ cbv = datasets.fetch_annotation(source='raichle', desc='cbv', return_single=True
 cmrglc_raichle = datasets.fetch_annotation(source='raichle', desc='cmrglc', return_single=True) #glucose metabolism
 cmro2 = datasets.fetch_annotation(source='raichle', desc='cmr02', return_single=True) #oxygen metabolism
 
+#Specific DevExp annotation (right hemi only)
+devexp = datasets.fetch_annotation(source='hill2010', desc='devexp', return_single=True)
+rh_sphere = '/Users/shefalirai/neuromaps-data/atlases/fsLR/tpl-fsLR_den-164k_hemi-R_sphere.surf.gii'
 
 #Annotations-fsLR 32k
 saaxis = datasets.fetch_annotation(source='sydnor2021', desc='SAaxis', return_single=True) #sensorimotor-association axis
@@ -114,6 +117,29 @@ for measure in measures:
             row[f'p_{name}'] = p_val
             print(f'  {name}: r = {r_val:.3f}, p = {p_val:.4f}')
  
+        #Separate resampling for Devexp-RH only
+        my_map_rh, _ = resampling.resample_images(
+            src=rh, trg=devexp,
+            src_space='fsaverage', trg_space='fsLR',
+            resampling='transform_to_trg',
+            hemi='R')
+
+        data_rh = images.load_data(my_map_rh)
+        rot_rh  = nulls.alexander_bloch(data_rh, atlas='fsLR', density='164k',
+                                        n_perm=1000, seed=1234,
+                                        surfaces=(rh_sphere,))
+
+        _, annot_r = resampling.resample_images(
+            src=rh, trg=devexp,
+            src_space='fsaverage', trg_space='fsLR',
+            resampling='transform_to_trg',
+            hemi='R')
+
+        r_val, p_val = stats.compare_images(my_map_rh, annot_r, nulls=rot_rh)
+        row['r_devexp'] = r_val
+        row['p_devexp'] = p_val
+        print(f'  devexp: r = {r_val:.3f}, p = {p_val:.4f}')
+
         #fsLR 32k
         my_map_r3, _ = resampling.resample_images(
             src=my_map, trg=saaxis,

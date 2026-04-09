@@ -34,16 +34,17 @@ measure_labels <- c(
 
 r_cols      <- grep("^r_", names(df), value = TRUE)
 annot_names <- c("genepc1", "subjvar", "cbf", "cbv", "cmrglc_raichle", "cmro2",
-                 "SAaxis", "evoexp_xu")
+                 "SAaxis", "evoexp_xu", "devexp")
 annot_labels <- c(
-  "genepc1"       = "Gene Expression PC1",
-  "subjvar"       = "Intersubject Variability",
-  "cbf"           = "Cerebral Blood Flow",
-  "cbv"           = "Cerebral Blood Volume",
+  "genepc1" = "Gene Expression PC1",
+  "subjvar" = "Intersubject Variability",
+  "cbf" = "Cerebral Blood Flow",
+  "cbv" = "Cerebral Blood Volume",
   "cmrglc_raichle" = "Glucose Metabolism",
-  "cmro2"         = "Oxygen Metabolism",
-  "SAaxis"        = "Sensorimotor-Association Axis",
-  "evoexp_xu"     = "Evolutionary Expansion"
+  "cmro2"= "Oxygen Metabolism",
+  "SAaxis" = "Sensorimotor-Association Axis",
+  "evoexp_xu" = "Evolutionary Expansion",
+  "devexp" = "Developmental Expansion(*RH)"
 )
 
 plot_rows <- lapply(annot_names, function(name) {
@@ -57,14 +58,26 @@ plot_rows <- lapply(annot_names, function(name) {
   )
 })
 
+# # Original no FDR
+# plot_df <- bind_rows(plot_rows) %>%
+#   mutate(
+#     significant = p < 0.05,
+#     measure     = factor(measure,    levels = rev(measure_order)), 
+#     contrast    = factor(contrast,   levels = contrast_order),
+#     annotation  = factor(annotation, levels = annot_names)
+#   )
+
+# FDR correction
 plot_df <- bind_rows(plot_rows) %>%
+  group_by(annotation) %>% #correct across each annotation for all contrasts & measures
+  mutate(p_fdr = p.adjust(p, method = "fdr")) %>%
+  ungroup() %>%
   mutate(
-    significant = p < 0.05,
-    measure     = factor(measure,    levels = rev(measure_order)),  # top → bottom
+    significant = p_fdr < 0.05,       #was only p < 0.05 no FDR before
+    measure     = factor(measure,    levels = rev(measure_order)),
     contrast    = factor(contrast,   levels = contrast_order),
     annotation  = factor(annotation, levels = annot_names)
   )
-
 
 pub_theme <- theme_minimal(base_size = 11) +
   theme(
@@ -187,7 +200,7 @@ fig_w <- n_annot * 0.52 + 3.5
 fig_h <- n_measure * 0.52 * 3 + 3.0
 
 ggsave(
-  filename = file.path(out_dir, "sigcircles_heatmap_neuromaps_ggplot.png"),
+  filename = file.path(out_dir, "sigcircles_heatmap_neuromaps_FDRggplot.png"),
   plot     = final,
   width    = fig_w,
   height   = fig_h,
