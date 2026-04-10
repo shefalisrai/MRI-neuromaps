@@ -58,26 +58,26 @@ plot_rows <- lapply(annot_names, function(name) {
   )
 })
 
-# # Original no FDR
-# plot_df <- bind_rows(plot_rows) %>%
-#   mutate(
-#     significant = p < 0.05,
-#     measure     = factor(measure,    levels = rev(measure_order)), 
-#     contrast    = factor(contrast,   levels = contrast_order),
-#     annotation  = factor(annotation, levels = annot_names)
-#   )
-
-# FDR correction
+# Original no FDR
 plot_df <- bind_rows(plot_rows) %>%
-  group_by(annotation) %>% #correct across each annotation for all contrasts & measures
-  mutate(p_fdr = p.adjust(p, method = "fdr")) %>%
-  ungroup() %>%
   mutate(
-    significant = p_fdr < 0.05,       #was only p < 0.05 no FDR before
+    significant = p < 0.05,
     measure     = factor(measure,    levels = rev(measure_order)),
     contrast    = factor(contrast,   levels = contrast_order),
     annotation  = factor(annotation, levels = annot_names)
   )
+
+# # FDR correction
+# plot_df <- bind_rows(plot_rows) %>%
+#   group_by(annotation) %>% #correct across each annotation for all contrasts & measures
+#   mutate(p_fdr = p.adjust(p, method = "fdr")) %>%
+#   ungroup() %>%
+#   mutate(
+#     significant = p_fdr < 0.05,       #was only p < 0.05 no FDR before
+#     measure     = factor(measure,    levels = rev(measure_order)),
+#     contrast    = factor(contrast,   levels = contrast_order),
+#     annotation  = factor(annotation, levels = annot_names)
+#   )
 
 pub_theme <- theme_minimal(base_size = 11) +
   theme(
@@ -200,7 +200,7 @@ fig_w <- n_annot * 0.52 + 3.5
 fig_h <- n_measure * 0.52 * 3 + 3.0
 
 ggsave(
-  filename = file.path(out_dir, "sigcircles_heatmap_neuromaps_FDRggplot.png"),
+  filename = file.path(out_dir, "sigcircles_heatmap_neuromaps_noFDRggplot.png"),
   plot     = final,
   width    = fig_w,
   height   = fig_h,

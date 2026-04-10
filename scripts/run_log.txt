@@ -1,0 +1,364 @@
+
+[References] Please cite the following papers if you are using this data:
+
+  For {'source': 'abagen', 'desc': 'genepc1', 'space': 'fsaverage', 'den': '10k'}:
+  [primary]:
+    Michael J Hawrylycz, Ed S Lein, Angela L Guillozet-Bongaarts, Elaine H Shen, Lydia Ng, Jeremy A Miller, Louie N Van De Lagemaat, Kimberly A Smith, Amanda Ebbert, Zackery L Riley, and others. An anatomically comprehensive atlas of the adult human brain transcriptome. Nature, 489(7416):391, 2012.
+    Ross D Markello, Aurina Arnatkeviciute, Jean-Baptiste Poline, Ben D Fulcher, Alex Fornito, and Bratislav Misic. Standardizing workflows in imaging transcriptomics with the abagen toolbox. eLife, 10:e72129, 2021.
+  [secondary]:
+    
+
+[References] Please cite the following papers if you are using this data:
+
+  For {'source': 'mueller2013', 'desc': 'intersubjvar', 'space': 'fsLR', 'den': '164k'}:
+  [primary]:
+    Sophia Mueller, Danhong Wang, Michael D Fox, BT Thomas Yeo, Jorge Sepulcre, Mert R Sabuncu, Rebecca Shafee, Jie Lu, and Hesheng Liu. Individual variability in functional connectivity architecture of the human brain. Neuron, 77(3):586–595, 2013.
+  [secondary]:
+    
+
+[References] Please cite the following papers if you are using this data:
+
+  For {'source': 'raichle', 'desc': 'cbf', 'space': 'fsLR', 'den': '164k'}:
+  [primary]:
+    S Neil Vaishnavi, Andrei G Vlassenko, Melissa M Rundle, Abraham Z Snyder, Mark A Mintun, and Marcus E Raichle. Regional aerobic glycolysis in the human brain. Proceedings of the National Academy of Sciences, 107(41):17757–17762, 2010.
+  [secondary]:
+    
+
+[References] Please cite the following papers if you are using this data:
+
+  For {'source': 'raichle', 'desc': 'cbv', 'space': 'fsLR', 'den': '164k'}:
+  [primary]:
+    S Neil Vaishnavi, Andrei G Vlassenko, Melissa M Rundle, Abraham Z Snyder, Mark A Mintun, and Marcus E Raichle. Regional aerobic glycolysis in the human brain. Proceedings of the National Academy of Sciences, 107(41):17757–17762, 2010.
+  [secondary]:
+    
+
+[References] Please cite the following papers if you are using this data:
+
+  For {'source': 'raichle', 'desc': 'cmrglc', 'space': 'fsLR', 'den': '164k'}:
+  [primary]:
+    S Neil Vaishnavi, Andrei G Vlassenko, Melissa M Rundle, Abraham Z Snyder, Mark A Mintun, and Marcus E Raichle. Regional aerobic glycolysis in the human brain. Proceedings of the National Academy of Sciences, 107(41):17757–17762, 2010.
+  [secondary]:
+    
+
+[References] Please cite the following papers if you are using this data:
+
+  For {'source': 'raichle', 'desc': 'cmr02', 'space': 'fsLR', 'den': '164k'}:
+  [primary]:
+    S Neil Vaishnavi, Andrei G Vlassenko, Melissa M Rundle, Abraham Z Snyder, Mark A Mintun, and Marcus E Raichle. Regional aerobic glycolysis in the human brain. Proceedings of the National Academy of Sciences, 107(41):17757–17762, 2010.
+  [secondary]:
+    
+
+[References] Please cite the following papers if you are using this data:
+
+  For {'source': 'hill2010', 'desc': 'devexp', 'space': 'fsLR', 'den': '164k'}:
+  [primary]:
+    Jason Hill, Terrie Inder, Jeffrey Neil, Donna Dierker, John Harwell, and David Van Essen. Similar patterns of cortical expansion during human development and evolution. Proceedings of the National Academy of Sciences, 107(29):13135–13140, 2010.
+  [secondary]:
+    
+
+[References] Please cite the following papers if you are using this data:
+
+  For {'source': 'sydnor2021', 'desc': 'SAaxis', 'space': 'fsLR', 'den': '32k'}:
+  [primary]:
+    Valerie J Sydnor, Bart Larsen, Danielle S Bassett, Aaron Alexander-Bloch, Damien A Fair, Conor Liston, Allyson P Mackey, Michael P Milham, Adam Pines, David R Roalf, and others. Neurodevelopment of the association cortices: patterns, mechanisms, and implications for psychopathology. Neuron, 109(18):2820–2846, 2021.
+  [secondary]:
+    
+
+[References] Please cite the following papers if you are using this data:
+
+  For {'source': 'xu2020', 'desc': 'evoexp', 'space': 'fsLR', 'den': '32k'}:
+  [primary]:
+    Ting Xu, Karl-Heinz Nenning, Ernst Schwartz, Seok-Jun Hong, Joshua T Vogelstein, Alexandros Goulas, Damien A Fair, Charles E Schroeder, Daniel S Margulies, Jonny Smallwood, and others. Cross-species functional alignment reveals evolutionary hierarchy within the connectome. Neuroimage, 223:117346, 2020.
+  [secondary]:
+    
+
+Running: T1w_contrast - EDR_HC
+  genepc1: r = -0.114, p = 0.7463
+  subjvar: r = -0.130, p = 0.4376
+  cbf: r = -0.143, p = 0.3816
+  cbv: r = 0.085, p = 0.5554
+  cmrglc_raichle: r = -0.315, p = 0.0470
+  cmro2: r = -0.152, p = 0.3487
+  devexp: r = -0.182, p = 0.1518
+  SAaxis: r = 0.013, p = 0.9630
+  evoexp_xu: r = -0.099, p = 0.2817
+
+Running: T1w_contrast - EDBP_HC
+  genepc1: r = 0.087, p = 0.7183
+  subjvar: r = -0.032, p = 0.8242
+  cbf: r = -0.085, p = 0.5385
+  cbv: r = 0.134, p = 0.2328
+  cmrglc_raichle: r = -0.151, p = 0.3596
+  cmro2: r = -0.008, p = 0.9560
+  devexp: r = -0.111, p = 0.2527
+  SAaxis: r = -0.035, p = 0.8541
+  evoexp_xu: r = 0.081, p = 0.3467
+
+Running: T1w_contrast - EDR_EDBP
+  genepc1: r = -0.206, p = 0.2398
+  subjvar: r = -0.090, p = 0.4456
+  cbf: r = -0.049, p = 0.6703
+  cbv: r = -0.060, p = 0.5664
+  cmrglc_raichle: r = -0.144, p = 0.2997
+  cmro2: r = -0.139, p = 0.2178
+  devexp: r = -0.081, p = 0.4306
+  SAaxis: r = 0.050, p = 0.7512
+  evoexp_xu: r = -0.183, p = 0.0210
+
+Running: sulc - EDR_HC
+  genepc1: r = 0.014, p = 0.8591
+  subjvar: r = 0.062, p = 0.4166
+  cbf: r = 0.071, p = 0.2867
+  cbv: r = 0.088, p = 0.2078
+  cmrglc_raichle: r = 0.043, p = 0.5764
+  cmro2: r = 0.091, p = 0.1908
+  devexp: r = 0.033, p = 0.6703
+  SAaxis: r = 0.011, p = 0.8881
+  evoexp_xu: r = 0.054, p = 0.4396
+
+Running: sulc - EDBP_HC
+  genepc1: r = 0.053, p = 0.5205
+  subjvar: r = -0.017, p = 0.8262
+  cbf: r = 0.074, p = 0.2308
+  cbv: r = 0.073, p = 0.2288
+  cmrglc_raichle: r = 0.091, p = 0.1389
+  cmro2: r = 0.118, p = 0.0639
+  devexp: r = 0.105, p = 0.1918
+  SAaxis: r = 0.000, p = 0.9980
+  evoexp_xu: r = 0.206, p = 0.0030
+
+Running: sulc - EDR_EDBP
+  genepc1: r = -0.044, p = 0.3706
+  subjvar: r = 0.079, p = 0.1718
+  cbf: r = -0.010, p = 0.8601
+  cbv: r = 0.008, p = 0.8681
+  cmrglc_raichle: r = -0.056, p = 0.2537
+  cmro2: r = -0.037, p = 0.4505
+  devexp: r = -0.081, p = 0.2068
+  SAaxis: r = 0.011, p = 0.8631
+  evoexp_xu: r = -0.169, p = 0.0040
+
+Running: thickness - EDR_HC
+  genepc1: r = 0.173, p = 0.1768
+  subjvar: r = 0.003, p = 0.9800
+  cbf: r = 0.019, p = 0.8541
+  cbv: r = -0.016, p = 0.8432
+  cmrglc_raichle: r = 0.095, p = 0.4086
+  cmro2: r = 0.133, p = 0.1588
+  devexp: r = 0.054, p = 0.6563
+  SAaxis: r = -0.046, p = 0.7552
+  evoexp_xu: r = 0.131, p = 0.1588
+
+Running: thickness - EDBP_HC
+  genepc1: r = 0.228, p = 0.0280
+  subjvar: r = 0.067, p = 0.6034
+  cbf: r = 0.076, p = 0.4865
+  cbv: r = -0.067, p = 0.4545
+  cmrglc_raichle: r = 0.210, p = 0.0370
+  cmro2: r = 0.177, p = 0.1009
+  devexp: r = 0.043, p = 0.6943
+  SAaxis: r = -0.010, p = 0.9530
+  evoexp_xu: r = 0.032, p = 0.6983
+
+Running: thickness - EDR_EDBP
+  genepc1: r = -0.062, p = 0.5534
+  subjvar: r = -0.066, p = 0.6234
+  cbf: r = -0.058, p = 0.5834
+  cbv: r = 0.053, p = 0.5574
+  cmrglc_raichle: r = -0.120, p = 0.2977
+  cmro2: r = -0.050, p = 0.6753
+  devexp: r = 0.014, p = 0.9181
+  SAaxis: r = -0.036, p = 0.7862
+  evoexp_xu: r = 0.094, p = 0.2937
+
+Running: area - EDR_HC
+  genepc1: r = -0.036, p = 0.8501
+  subjvar: r = 0.050, p = 0.7393
+  cbf: r = -0.041, p = 0.7123
+  cbv: r = 0.038, p = 0.6923
+  cmrglc_raichle: r = 0.010, p = 0.9401
+  cmro2: r = -0.012, p = 0.9051
+  devexp: r = -0.005, p = 0.9760
+  SAaxis: r = 0.076, p = 0.6823
+  evoexp_xu: r = 0.076, p = 0.5185
+
+Running: area - EDBP_HC
+  genepc1: r = -0.296, p = 0.0260
+  subjvar: r = 0.254, p = 0.0639
+  cbf: r = -0.189, p = 0.0809
+  cbv: r = -0.078, p = 0.4476
+  cmrglc_raichle: r = -0.202, p = 0.0839
+  cmro2: r = -0.214, p = 0.0500
+  devexp: r = 0.068, p = 0.5844
+  SAaxis: r = 0.199, p = 0.1688
+  evoexp_xu: r = 0.048, p = 0.6633
+
+Running: area - EDR_EDBP
+  genepc1: r = 0.275, p = 0.0200
+  subjvar: r = -0.216, p = 0.1239
+  cbf: r = 0.156, p = 0.1249
+  cbv: r = 0.122, p = 0.1938
+  cmrglc_raichle: r = 0.224, p = 0.0340
+  cmro2: r = 0.214, p = 0.0350
+  devexp: r = -0.076, p = 0.5914
+  SAaxis: r = -0.129, p = 0.3397
+  evoexp_xu: r = 0.028, p = 0.8032
+
+Running: RND-gm - EDR_HC
+  genepc1: r = -0.497, p = 0.0190
+  subjvar: r = 0.203, p = 0.2577
+  cbf: r = 0.015, p = 0.9550
+  cbv: r = -0.111, p = 0.5514
+  cmrglc_raichle: r = -0.124, p = 0.6823
+  cmro2: r = -0.209, p = 0.2767
+  devexp: r = 0.088, p = 0.4925
+  SAaxis: r = 0.451, p = 0.0060
+  evoexp_xu: r = -0.025, p = 0.8312
+
+Running: RND-gm - EDBP_HC
+  genepc1: r = -0.286, p = 0.0509
+  subjvar: r = -0.067, p = 0.6074
+  cbf: r = 0.087, p = 0.4955
+  cbv: r = -0.073, p = 0.5295
+  cmrglc_raichle: r = -0.043, p = 0.7792
+  cmro2: r = -0.060, p = 0.6513
+  devexp: r = 0.027, p = 0.7852
+  SAaxis: r = 0.181, p = 0.3037
+  evoexp_xu: r = 0.037, p = 0.6563
+
+Running: RND-gm - EDR_EDBP
+  genepc1: r = -0.292, p = 0.2897
+  subjvar: r = 0.324, p = 0.0430
+  cbf: r = -0.079, p = 0.6853
+  cbv: r = -0.057, p = 0.7133
+  cmrglc_raichle: r = -0.104, p = 0.6703
+  cmro2: r = -0.190, p = 0.2757
+  devexp: r = 0.091, p = 0.4136
+  SAaxis: r = 0.356, p = 0.1029
+  evoexp_xu: r = -0.073, p = 0.4426
+
+Running: RNI-gm - EDR_HC
+  genepc1: r = -0.416, p = 0.0480
+  subjvar: r = 0.106, p = 0.5125
+  cbf: r = 0.115, p = 0.5574
+  cbv: r = -0.098, p = 0.5375
+  cmrglc_raichle: r = -0.107, p = 0.6613
+  cmro2: r = -0.095, p = 0.6044
+  devexp: r = 0.052, p = 0.7113
+  SAaxis: r = 0.301, p = 0.1798
+  evoexp_xu: r = -0.061, p = 0.4995
+
+Running: RNI-gm - EDBP_HC
+  genepc1: r = -0.236, p = 0.1858
+  subjvar: r = -0.106, p = 0.4126
+  cbf: r = 0.057, p = 0.6863
+  cbv: r = 0.013, p = 0.9121
+  cmrglc_raichle: r = -0.141, p = 0.3586
+  cmro2: r = -0.032, p = 0.7932
+  devexp: r = -0.118, p = 0.2757
+  SAaxis: r = 0.093, p = 0.5834
+  evoexp_xu: r = 0.048, p = 0.6294
+
+Running: RNI-gm - EDR_EDBP
+  genepc1: r = -0.220, p = 0.3986
+  subjvar: r = 0.262, p = 0.0579
+  cbf: r = 0.071, p = 0.6793
+  cbv: r = -0.137, p = 0.3337
+  cmrglc_raichle: r = 0.041, p = 0.8462
+  cmro2: r = -0.077, p = 0.6324
+  devexp: r = 0.200, p = 0.1029
+  SAaxis: r = 0.253, p = 0.2108
+  evoexp_xu: r = -0.133, p = 0.1688
+
+Running: RND-wm - EDR_HC
+  genepc1: r = -0.053, p = 0.8342
+  subjvar: r = 0.074, p = 0.4805
+  cbf: r = -0.152, p = 0.1988
+  cbv: r = 0.128, p = 0.1868
+  cmrglc_raichle: r = -0.169, p = 0.1868
+  cmro2: r = -0.076, p = 0.5415
+  devexp: r = -0.019, p = 0.8691
+  SAaxis: r = 0.065, p = 0.6843
+  evoexp_xu: r = 0.138, p = 0.1189
+
+Running: RND-wm - EDBP_HC
+  genepc1: r = -0.145, p = 0.4875
+  subjvar: r = -0.075, p = 0.5804
+  cbf: r = -0.060, p = 0.6663
+  cbv: r = 0.083, p = 0.4406
+  cmrglc_raichle: r = -0.201, p = 0.1329
+  cmro2: r = -0.088, p = 0.5175
+  devexp: r = -0.098, p = 0.3986
+  SAaxis: r = 0.050, p = 0.8022
+  evoexp_xu: r = 0.035, p = 0.7423
+
+Running: RND-wm - EDR_EDBP
+  genepc1: r = 0.129, p = 0.3806
+  subjvar: r = 0.162, p = 0.1598
+  cbf: r = -0.073, p = 0.5245
+  cbv: r = 0.022, p = 0.8172
+  cmrglc_raichle: r = 0.082, p = 0.5634
+  cmro2: r = 0.034, p = 0.8032
+  devexp: r = 0.089, p = 0.4486
+  SAaxis: r = 0.001, p = 0.9960
+  evoexp_xu: r = 0.091, p = 0.3127
+
+Running: RNI-wm - EDR_HC
+  genepc1: r = -0.225, p = 0.1039
+  subjvar: r = 0.081, p = 0.5455
+  cbf: r = -0.007, p = 0.9491
+  cbv: r = -0.067, p = 0.4955
+  cmrglc_raichle: r = -0.107, p = 0.4236
+  cmro2: r = -0.115, p = 0.3686
+  devexp: r = 0.195, p = 0.0709
+  SAaxis: r = 0.101, p = 0.4965
+  evoexp_xu: r = 0.056, p = 0.5455
+
+Running: RNI-wm - EDBP_HC
+  genepc1: r = 0.006, p = 0.9710
+  subjvar: r = -0.256, p = 0.0400
+  cbf: r = 0.130, p = 0.2727
+  cbv: r = 0.085, p = 0.3546
+  cmrglc_raichle: r = -0.060, p = 0.6364
+  cmro2: r = 0.081, p = 0.5514
+  devexp: r = -0.204, p = 0.1079
+  SAaxis: r = -0.168, p = 0.2018
+  evoexp_xu: r = 0.046, p = 0.6883
+
+Running: RNI-wm - EDR_EDBP
+  genepc1: r = -0.213, p = 0.1948
+  subjvar: r = 0.343, p = 0.0030
+  cbf: r = -0.143, p = 0.2527
+  cbv: r = -0.151, p = 0.1459
+  cmrglc_raichle: r = -0.034, p = 0.7882
+  cmro2: r = -0.190, p = 0.1209
+  devexp: r = 0.353, p = 0.0030
+  SAaxis: r = 0.269, p = 0.0629
+  evoexp_xu: r = 0.002, p = 0.9880
+
+Results saved to /Users/shefalirai/Desktop/UCSD_Research/TemperamentData/Temperament_analysis/neuromaps/results/neuromaps_results.csv
+         measure  contrast  r_genepc1  p_genepc1  r_subjvar  p_subjvar     r_cbf     p_cbf     r_cbv     p_cbv  r_cmrglc_raichle  p_cmrglc_raichle   r_cmro2   p_cmro2  r_devexp  p_devexp  r_SAaxis  p_SAaxis  r_evoexp_xu  p_evoexp_xu
+0   T1w_contrast    EDR_HC  -0.114116   0.746254  -0.129582   0.437562 -0.143480  0.381618  0.085162  0.555445         -0.314724          0.046953 -0.152263  0.348651 -0.182428  0.151848  0.012920  0.963037    -0.098681     0.281718
+1   T1w_contrast   EDBP_HC   0.086507   0.718282  -0.032391   0.824176 -0.085094  0.538462  0.133524  0.232767         -0.151344          0.359640 -0.008090  0.956044 -0.111013  0.252747 -0.034505  0.854146     0.081301     0.346653
+2   T1w_contrast  EDR_EDBP  -0.206374   0.239760  -0.090304   0.445554 -0.048796  0.670330 -0.059981  0.566434         -0.143875          0.299700 -0.139217  0.217782 -0.080929  0.430569  0.050202  0.751249    -0.183396     0.020979
+3           sulc    EDR_HC   0.013818   0.859141   0.061878   0.416583  0.071264  0.286713  0.087556  0.207792          0.042923          0.576424  0.091246  0.190809  0.033024  0.670330  0.011469  0.888112     0.053854     0.439560
+4           sulc   EDBP_HC   0.053231   0.520480  -0.016880   0.826174  0.074111  0.230769  0.073080  0.228771          0.091423          0.138861  0.118285  0.063936  0.105085  0.191808  0.000341  0.998002     0.205978     0.002997
+5           sulc  EDR_EDBP  -0.043721   0.370629   0.078872   0.171828 -0.009638  0.860140  0.007752  0.868132         -0.056119          0.253746 -0.037427  0.450549 -0.081091  0.206793  0.010869  0.863137    -0.168799     0.003996
+6      thickness    EDR_HC   0.173455   0.176823   0.002583   0.980020  0.019450  0.854146 -0.016241  0.843157          0.095473          0.408591  0.133471  0.158841  0.053924  0.656344 -0.046373  0.755245     0.130510     0.158841
+7      thickness   EDBP_HC   0.227787   0.027972   0.067459   0.603397  0.076035  0.486513 -0.067386  0.454545          0.209688          0.036963  0.177182  0.100899  0.042748  0.694306 -0.009526  0.953047     0.031573     0.698302
+8      thickness  EDR_EDBP  -0.061891   0.553447  -0.066279   0.623377 -0.057737  0.583417  0.052675  0.557443         -0.119724          0.297702 -0.049802  0.675325  0.014333  0.918082 -0.036123  0.786214     0.094034     0.293706
+9           area    EDR_HC  -0.036424   0.850150   0.049610   0.739261 -0.041145  0.712288  0.038161  0.692308          0.010393          0.940060 -0.011610  0.905095 -0.004693  0.976024  0.076097  0.682318     0.075622     0.518482
+10          area   EDBP_HC  -0.296485   0.025974   0.253714   0.063936 -0.188666  0.080919 -0.077918  0.447552         -0.201908          0.083916 -0.214421  0.049950  0.068435  0.584416  0.198647  0.168831     0.048253     0.663337
+11          area  EDR_EDBP   0.275454   0.019980  -0.215763   0.123876  0.155982  0.124875  0.122422  0.193806          0.224312          0.033966  0.214267  0.034965 -0.076160  0.591409 -0.129363  0.339660     0.028238     0.803197
+12        RND-gm    EDR_HC  -0.496520   0.018981   0.202801   0.257742  0.015211  0.955045 -0.111391  0.551449         -0.124233          0.682318 -0.209340  0.276723  0.087797  0.492507  0.451131  0.005994    -0.024862     0.831169
+13        RND-gm   EDBP_HC  -0.285812   0.050949  -0.066839   0.607393  0.087074  0.495504 -0.073065  0.529471         -0.042954          0.779221 -0.060163  0.651349  0.026551  0.785215  0.180928  0.303696     0.037229     0.656344
+14        RND-gm  EDR_EDBP  -0.292154   0.289710   0.324466   0.042957 -0.078820  0.685315 -0.056605  0.713287         -0.104455          0.670330 -0.190097  0.275724  0.091348  0.413586  0.356421  0.102897    -0.072670     0.442557
+15        RNI-gm    EDR_HC  -0.415680   0.047952   0.105694   0.512488  0.115235  0.557443 -0.097889  0.537463         -0.107197          0.661339 -0.094832  0.604396  0.052252  0.711289  0.300802  0.179820    -0.060870     0.499500
+16        RNI-gm   EDBP_HC  -0.235805   0.185814  -0.106491   0.412587  0.057152  0.686314  0.012680  0.912088         -0.140787          0.358641 -0.032398  0.793207 -0.118243  0.275724  0.092922  0.583417     0.048068     0.629371
+17        RNI-gm  EDR_EDBP  -0.219622   0.398601   0.261674   0.057942  0.071310  0.679321 -0.137081  0.333666          0.040884          0.846154 -0.077370  0.632368  0.199817  0.102897  0.253157  0.210789    -0.132626     0.168831
+18        RND-wm    EDR_HC  -0.052876   0.834166   0.073581   0.480519 -0.151647  0.198801  0.127767  0.186813         -0.169208          0.186813 -0.075839  0.541459 -0.019260  0.869131  0.064718  0.684316     0.137789     0.118881
+19        RND-wm   EDBP_HC  -0.144520   0.487512  -0.075332   0.580420 -0.060189  0.666334  0.083320  0.440559         -0.201293          0.132867 -0.088236  0.517483 -0.098309  0.398601  0.050049  0.802198     0.034645     0.742258
+20        RND-wm  EDR_EDBP   0.128846   0.380619   0.162419   0.159840 -0.072610  0.524476  0.021519  0.817183          0.081871          0.563437  0.034204  0.803197  0.089180  0.448551  0.001245  0.996004     0.090530     0.312687
+21        RNI-wm    EDR_HC  -0.224998   0.103896   0.081394   0.545455 -0.006776  0.949051 -0.066538  0.495504         -0.107165          0.423576 -0.114737  0.368631  0.195496  0.070929  0.101180  0.496503     0.055810     0.545455
+22        RNI-wm   EDBP_HC   0.005555   0.971029  -0.255782   0.039960  0.129819  0.272727  0.085302  0.354645         -0.060098          0.636364  0.081471  0.551449 -0.203957  0.107892 -0.168417  0.201798     0.046213     0.688312
+23        RNI-wm  EDR_EDBP  -0.212543   0.194805   0.343357   0.002997 -0.142571  0.252747 -0.150632  0.145854         -0.034149          0.788212 -0.189932  0.120879  0.353161  0.002997  0.268906  0.062937     0.002066     0.988012
