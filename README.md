@@ -1,4 +1,4 @@
-This repository contains analysis scripts and results for data from adolescents with eating disorders from UCSD Eating Disorder Clinic.
+This repository contains analysis scripts from adolescents with eating disorders from UCSD Eating Disorder Clinic.
 Analyses use vertex-wise MRI contrast maps correlated with brain atlas annotations obtained from neuromaps.
 
 ## Toolboxes & Data
