@@ -5,6 +5,7 @@ library(ggplot2)
 library(RColorBrewer)
 library(cowplot)
 library(scales)
+Sys.setlocale("LC_CTYPE", "en_US.UTF-8")  # ensure UTF-8 so the dagger (†) renders, not "..."
 
 out_dir <- "/Users/shefalirai/Desktop/UCSD_Research/TemperamentData/Temperament_analysis/neuromaps/results/"
 df<- read.csv(file.path(out_dir, "neuromaps_results.csv"), stringsAsFactors = FALSE)
@@ -33,11 +34,10 @@ measure_labels <- c(
 )
 
 r_cols      <- grep("^r_", names(df), value = TRUE)
-annot_names <- c("genepc1", "subjvar", "cbf", "cbv", "cmrglc_raichle", "cmro2",
+annot_names <- c("genepc1", "cbf", "cbv", "cmrglc_raichle", "cmro2",
                  "SAaxis", "evoexp_xu", "devexp")
 annot_labels <- c(
   "genepc1" = "Gene Expression PC1",
-  "subjvar" = "Intersubject Variability",
   "cbf" = "Cerebral Blood Flow",
   "cbv" = "Cerebral Blood Volume",
   "cmrglc_raichle" = "Glucose Metabolism",
@@ -58,53 +58,48 @@ plot_rows <- lapply(annot_names, function(name) {
   )
 })
 
-# Original no FDR
-plot_df <- bind_rows(plot_rows) %>%
-  mutate(
-    significant = p < 0.05,
-    measure     = factor(measure,    levels = rev(measure_order)),
-    contrast    = factor(contrast,   levels = contrast_order),
-    annotation  = factor(annotation, levels = annot_names)
-  )
-
-# # FDR correction
+# # Original no FDR
 # plot_df <- bind_rows(plot_rows) %>%
-#   group_by(annotation) %>% #correct across each annotation for all contrasts & measures
-#   mutate(p_fdr = p.adjust(p, method = "fdr")) %>%
-#   ungroup() %>%
 #   mutate(
-#     significant = p_fdr < 0.05,       #was only p < 0.05 no FDR before
+#     significant = p < 0.05,
 #     measure     = factor(measure,    levels = rev(measure_order)),
 #     contrast    = factor(contrast,   levels = contrast_order),
 #     annotation  = factor(annotation, levels = annot_names)
 #   )
 
+
+# FDR correction - add nominal significance tier
+plot_df <- bind_rows(plot_rows) %>%
+  group_by(measure) %>%
+  mutate(p_fdr = p.adjust(p, method = "fdr")) %>%
+  ungroup() %>%
+  mutate(
+    sig_fdr     = p_fdr < 0.05,
+    sig_nominal = p < 0.05 & !sig_fdr,          # nominal only
+    measure     = factor(measure,    levels = rev(measure_order)),
+    contrast    = factor(contrast,   levels = contrast_order),
+    annotation  = factor(annotation, levels = annot_names)
+  )
+
 pub_theme <- theme_minimal(base_size = 11) +
   theme(
-    panel.grid          = element_blank(),
-    panel.border        = element_rect(color = "grey30", fill = NA, linewidth = 0.5),
-    panel.background    = element_rect(fill = "white", color = NA),
-    plot.background     = element_rect(fill = "white", color = NA),
-    #xaxis
-    axis.text.x         = element_text(angle = 45, hjust = 1, vjust = 1,
-                                       size = 11, color = "black",
-                                       face = "bold"),
-    #yaxis
-    axis.text.y         = element_text(size = 11, color = "black", face="bold"),
-    axis.ticks          = element_line(color = "grey60", linewidth = 0.3),
-    axis.title          = element_blank(),
-    strip.text          = element_text(face = "bold", size = 11),
-    # Legend
-    legend.title        = element_text(size = 9, face = "bold"),
-    legend.text         = element_text(size = 8.5),
-    legend.key.width    = unit(0.5, "cm"),
-    legend.key.height   = unit(2.5, "cm"),
-    legend.position     = "right",
-    # Panel title: centered, larger
-    plot.title          = element_text(face = "bold", size = 11, hjust = 0.66,
-                                       margin = margin(b = 6)),
-    plot.title.position = "plot",
-    plot.margin         = margin(8, 6, 8, 6)
+        panel.grid       = element_blank(),
+        panel.border     = element_rect(color = "grey30", fill = NA, linewidth = 0.5),
+        panel.background = element_rect(fill = "white", color = NA),
+        plot.background  = element_rect(fill = "white", color = NA),
+        axis.text.x      = element_text(angle = 45, hjust = 1, vjust = 1,
+                                        size = 11, color = "black", face = "bold"),
+        axis.text.y      = element_text(size = 11, color = "black", face = "bold"),
+        axis.ticks       = element_line(color = "grey60", linewidth = 0.3),
+        axis.title       = element_blank(),
+        legend.title     = element_text(size = 9, face = "bold"),
+        legend.text      = element_text(size = 8.5),
+        legend.key.width  = unit(0.5, "cm"),
+        legend.key.height = unit(2.5, "cm"),
+        legend.position  = "right",
+        plot.title       = element_text(face = "bold", size = 13),
+        plot.subtitle    = element_text(size = 9),
+        plot.margin      = margin(8, 6, 8, 6)
   )
 
 r_limit   <- 0.5
@@ -123,31 +118,42 @@ make_panel <- function(contrast_id, show_y = TRUE, show_legend = FALSE, show_x =
   sub <- plot_df %>% filter(contrast == contrast_id)
   
   ggplot(sub, aes(x = annotation, y = measure)) +
-    # Color by r value
     geom_tile(aes(fill = r), color = "white", linewidth = 0.5) +
-    # White tile for sig.cells
-    geom_tile(data = filter(sub, significant),
+    
+    # ── FDR-significant: white bg tile + filled colored circle ──
+    geom_tile(data = filter(sub, sig_fdr),
               fill = "#F4F4F6", color = "white", linewidth = 0.5) +
-    # Colored circle for sig.cells
-    geom_point(data = filter(sub, significant),
+    geom_point(data = filter(sub, sig_fdr),
                aes(fill = r),
                shape = 21, size = 12, color = "black", stroke = 1.2) +
-    # Non-significant r values black
-    geom_text(data = filter(sub, !significant),
+    
+    # ── Nominal only: white bg tile + dashed-outline circle ──
+    geom_tile(data = filter(sub, sig_nominal),
+              fill = "#F4F4F6", color = "white", linewidth = 0.5) +
+    geom_point(data = filter(sub, sig_nominal),
+               aes(fill = r),
+               shape = 21, size = 12,
+               color  = "white",   # softer outline
+               stroke = 0.7) +  
+    
+    # Non-significant (neither): grey plain text
+    geom_text(data = filter(sub, !sig_fdr & !sig_nominal),
               aes(label = sprintf("%.2f", r)),
-              size = 3.0, color = "grey30", fontface = "plain", vjust = 0.5) +
-    # Significant r values black and bold
-    geom_text(data = filter(sub, significant),
+              size = 3.0, color = "black", fontface = "plain", vjust = 0.5) +
+    # Nominal only: italic text with a dagger †
+    geom_text(data = filter(sub, sig_nominal),
+              aes(label = sprintf("%.2f†", r)),
+              size = 3.0, color = "black", fontface = "italic", vjust = 0.5) +
+    # FDR significant: bold text with asterisk
+    geom_text(data = filter(sub, sig_fdr),
               aes(label = sprintf("%.2f*", r)),
               size = 3.0, color = "black", fontface = "bold", vjust = 0.5) +
+    
     geom_hline(yintercept = seq(0.5, length(measure_order) + 0.5, 1), color = "grey85", linewidth = 0.3) +
     geom_vline(xintercept = seq(0.5, length(annot_names) + 0.5, 1), color = "grey85", linewidth = 0.3) +
     pur_scale +
     scale_x_discrete(expand = c(0, 0), labels = if (show_x) annot_labels else NULL) +
-    scale_y_discrete(
-      expand = c(0, 0),
-      labels = if (show_y) measure_labels else NULL
-    ) +
+    scale_y_discrete(expand = c(0, 0), labels = if (show_y) measure_labels else NULL) +
     labs(title = contrast_labels[[contrast_id]]) +
     pub_theme +
     theme(legend.position = if (show_legend) "right" else "none")
@@ -200,7 +206,7 @@ fig_w <- n_annot * 0.52 + 3.5
 fig_h <- n_measure * 0.52 * 3 + 3.0
 
 ggsave(
-  filename = file.path(out_dir, "sigcircles_heatmap_neuromaps_noFDRggplot.png"),
+  filename = file.path(out_dir, "sigcircles_heatmap_neuromaps_acrossmeasuresFDRggplot.png"),
   plot     = final,
   width    = fig_w,
   height   = fig_h,
