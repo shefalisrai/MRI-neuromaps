@@ -6,3 +6,9 @@
 !scripts/**
 !celltypes_PSP.csv
 !.gitignore
+
+# Re-ignore OS/editor noise even under tracked folders
+**/.DS_Store
+**/__pycache__/
+**/*.pyc
+scripts/.Rhistory
